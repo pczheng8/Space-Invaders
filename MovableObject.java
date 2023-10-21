@@ -1,24 +1,3 @@
-// only fill in methods marked as   // FINISH ME
-
-// FINISH ME
-// YOU MUST ALSO make sure that you write the methods in the interface
-//    that are not already finished
-
-// DO NOT MODIFY THE OTHER METHODS UNLESS YOU KNOW WHAT YOU ARE DOING!!!!
-
-
-// all of your visible objects in the main program will be 
-// of type MovableObject
-// examples of how to create a MovableObject are shown below
-// ship = new MovableObject(centerPanel,"filename.png",x,y,width,height);
-//    or if you already have a reference to an image, you can call
-// ship = new MovableObject(centerPanel,"filename.png",image,x,y,width,height);
-
-// to do:
-// 
-
-
-
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.*;
@@ -26,27 +5,22 @@ import javax.swing.*;
 
 public class MovableObject implements MovableInterface
 {
-  // direction to move
-  // 0 to 360 compass direction
-  // you can also use a slope instead
   private int direction;
-  private int speed;  // used to move in the direction
+  private int speed;
   private float xRatio;
   private float yRatio;
   
-  private float shiftXValue; // shift to the left or to the right amount
-  private float shiftYValue; // shift down
-  private float shiftTime; // amount of time left before the shift occurs
-  private float shiftTimeStart; // amount of time the shift starts at
-  private float shiftTimeInterval; // amount of time elapsed for each draw cycle
+  private float shiftXValue;
+  private float shiftYValue;
+  private float shiftTime;
+  private float shiftTimeStart;
+  private float shiftTimeInterval;
   
-  // current location of object
   private float x;
   private float y;
   private int width;
   private int height;
 
-  // amount of time on the screen
   private float time;
   
   
@@ -54,29 +28,20 @@ public class MovableObject implements MovableInterface
   
   private boolean cloaked;
   
-  // speed of object using the slope of a line
-  // (you can also use a direction and speed instead)
   private int speedX;
   private int speedY;
   
-  // list of possible images to use
   private ArrayList <Image> imageList;
   
-  // list of filenames for the images (jpg, ...)
   private String [] imageFilenames;
   
-  // current image being displayed
   private Image currentImage;
 
-  // filename of current image being displayed
   private String currentFilename;
   
-      
-  // the JPanel that this object is being displayed on
   private JPanel mainPanel;
 
 
-  // centerPanel should be passed as the first parameter when you create a MovableObject
     public MovableObject(JPanel mainPanel, String filename, int x, int y, int width, int height)
     {
     direction = 0; // Location.NORTH;
@@ -84,7 +49,7 @@ public class MovableObject implements MovableInterface
     speed = 3;
     xRatio = 3;
     yRatio = 4;
-    this.mainPanel = null; // make sure you call setPanel
+    this.mainPanel = null;
     this.x = x;
     this.y = y;
     this.width = width;
@@ -104,7 +69,6 @@ public class MovableObject implements MovableInterface
     setCurrentFilename(filename);
   }
 
-  // centerPanel should be passed as the first parameter when you create a MovableObject
     public MovableObject(JPanel mainPanel, String filename, float x, float y, int width, int height)
     {
     direction = 0; // Location.NORTH;
@@ -112,7 +76,7 @@ public class MovableObject implements MovableInterface
     speed = 3;
     xRatio = 3;
     yRatio = 4;
-    this.mainPanel = null; // make sure you call setPanel
+    this.mainPanel = null;
     this.x = x;
     this.y = y;
     this.width = width;
@@ -140,7 +104,7 @@ public class MovableObject implements MovableInterface
     speed = 3;
     xRatio = 3;
     yRatio = 4;
-    this.mainPanel = null; // make sure you call setPanel
+    this.mainPanel = null;
     this.x = x;
     this.y = y;
     this.width = width;
@@ -168,7 +132,7 @@ public class MovableObject implements MovableInterface
     speed = 3;
     xRatio = 3;
     yRatio = 4;
-    this.mainPanel = null; // make sure you call setPanel
+    this.mainPanel = null;
     this.x = x;
     this.y = y;
     this.width = width;
@@ -212,8 +176,6 @@ public class MovableObject implements MovableInterface
       }
       catch (Exception e)
       {
-        // FINISH ME
-        // print out an error message
         System.out.println("error setImageFilenames with toolkit");
       }
     }
@@ -263,14 +225,6 @@ public class MovableObject implements MovableInterface
         currentImage = null;
       }
   }
-
-
-  // to start the shift process
-  // this is in sync with the draw method
-  
-  // call setShiftXValue(float shiftValue) which is the amount to shift
-  // call setShiftTimeInterval(float shiftTimeInterval) which should be in time with the clock
-  // call setShiftTimeStart(float shiftTimeStart) which is the amount of time between shifts
   
 
     public float getShiftTimeInterval()
@@ -329,7 +283,6 @@ public class MovableObject implements MovableInterface
  
   public void shift()
   {
-    // do the shift inside the draw method
     if (shiftTimeStart > 0)
     {
       setShiftTime(getShiftTime()-getShiftTimeInterval());
@@ -344,11 +297,8 @@ public class MovableObject implements MovableInterface
   
   }
   
-  
-  // FINISH ME (replace the 0)
     public int getDirection()
     {
-        // ?????????
         return direction;
     }
 
@@ -358,7 +308,6 @@ public class MovableObject implements MovableInterface
         this.direction = this.direction % 360;
     }
 
-    // FINISH ME (replace the 0)
     public float getX()
     {
         return x;
@@ -369,14 +318,11 @@ public class MovableObject implements MovableInterface
         return Math.round(x);
     }
 
-    // FINISH ME
     public void setX(float x)
     {
-      // ?????
       this.x = x;
     }
 
-    // FINISH ME (replace the 0)
     public float getY()
     {
       return y;
@@ -387,185 +333,136 @@ public class MovableObject implements MovableInterface
       return Math.round(y);
     }
 
-    // FINISH ME
     public void setY(float y)
     {
-      // ????????
       this.y = y;
     }
 
-    // FINISH ME
     public void setXY(float x, float y)
     {
-      // ???????
-      // ???????
       this.x = x;
       this.y = y;
     }
 
-    // FINISH ME (replace the 0)
     public int getWidth()
     {
         return width;
     }
 
-    // FINISH ME
     public void setWidth(int width)
     {
-      // ?????????
       this.width = width;
     }
 
-    // FINISH ME (replace the 0)
     public int getHeight()
     {
         return height;
     }
 
-    // FINISH ME
     public void setHeight(int height)
     {
-      // ?????????
       this.height = height;
     }
 
-  // FINISH ME
   public void setCloaked(boolean cloaked)
   {
-    // ?????????
     this.cloaked = cloaked;
   }
   
-  // FINISH ME
   public boolean getCloaked()
   {
-    // ???????????
     return cloaked;
   }
   
-  // FINISH ME
   public boolean isCloaked()
   {
-    // ??????????
     return cloaked;
   }
 
-    // FINISH ME (replace the 0)
     public int getSpeedX()
     {
         return speedX;
     }
 
-    // FINISH ME
     public void setSpeedX(int speedX)
     {
-      // ?????????
       this.speedX = speedX;
     }
 
-    // FINISH ME (replace the 0)
     public int getSpeedY()
     {
         return speedY;
     }
 
-    // FINISH ME
     public void setSpeed(int speed)
     {
-      // ?????????
       this.speed = speed;
     }
 
-    // FINISH ME (replace the 0)
     public int getSpeed()
     {
         return speed;
     }
 
-
-    // FINISH ME
     public void setXRatio(float xRatio)
     {
-      // ??????????????
       this.xRatio = xRatio;
     }
 
-    // FINISH ME (replace the 0)
     public float getXRatio()
     {
         return xRatio;
     }
 
-
-    // FINISH ME
     public void setYRatio(float yRatio)
     {
-      // ???????????
       this.yRatio = yRatio;
     }
 
-    // FINISH ME (replace the 0)
     public float getYRatio()
     {
         return yRatio;
     }
 
 
-    // FINISH ME
     public void setSpeedXY(int speedX, int speedY)
     {
-       // ?????????
-       // ?????????
       this.speedX = speedX;
       this.speedY = speedY;
     }
 
-    // FINISH ME
     public void setSpeedY(int speedY)
     {
-      // ???????????????
       this.speedY = speedY;
     }
 
-    // FINISH ME (replace the 0)
     public float getTime()
     {
       return time;
     }
 
-    // FINISH ME
     public void setTime(float time)
     {
-      // ??????????????
       this.time = time;
     }
 
 
-
-    // FINISH ME (replace the false)
     public boolean getHidden()
     {
       return hidden;
     }
 
-    // FINISH ME (replace the false)
     public boolean isHidden()
     {
       return hidden;
     }
 
-    // FINISH ME
     public void setHidden(boolean hidden)
     {
-      // ??????????????????
       this.hidden = hidden;
     }
 
 
-  // *************************************************************
-  // *** bounce methods ******************************************
-  // *************************************************************
-  
   public void bounceOffLeftWall()
   {       
     if (getSpeedX() < 0 && getSpeedY() > 0)
@@ -605,11 +502,6 @@ public class MovableObject implements MovableInterface
     
   }
   
-
-  // *************************************************************
-  // *** is hitting a wall ***************************************
-  // *************************************************************
-  
   
   public boolean isHittingTopSideOfWall(float wallY)
   {
@@ -640,15 +532,7 @@ public class MovableObject implements MovableInterface
     return false;     
   }
   
-  
-  // *************************************************************
-  // *** is hitting side of other object *************************
-  // *************************************************************
-  
-  
-  // checks for an intersection from the left
-  // width is the number of pixels on the object
-  // closeness is how close to the object to detect an intersection
+
   public float isHittingLeftSideOfOtherObjectByAmount(MovableObject other, int closeness, int width)
   {
     Rectangle rect1 = new Rectangle((int)(getX()+getWidth()-width+closeness),(int)getY(),width,(int)getHeight());
@@ -701,10 +585,6 @@ public class MovableObject implements MovableInterface
   }
 
 
-  // *************************************************************
-  // *** rectangle methods ***************************************
-  // *************************************************************
-    
   public Rectangle getRect()
 
   {
@@ -712,9 +592,6 @@ public class MovableObject implements MovableInterface
   }
 
 
-  // *************************************************************
-  // *** intersection methods ***************************************
-  // *************************************************************
 
   public boolean intersects(Rectangle rect1, Rectangle rect2)
   {
@@ -747,10 +624,6 @@ public class MovableObject implements MovableInterface
     return false;
   }
 
-  // *************************************************************
-  // *** point methods *******************************************
-  // *************************************************************
-    
   public Point getPoint()
   {
     return new Point(getXRounded(),getYRounded());
@@ -764,14 +637,7 @@ public class MovableObject implements MovableInterface
   }
 
 
-  // *************************************************************
-  // *** rectangle methods ***************************************
-  // *************************************************************
-    
-  // *************************************************************
-  // *** turn methods ********************************************
-  // *************************************************************
-    
+  
   public void turnRight()
   {
     setDirection(getDirection()+90);
@@ -783,10 +649,7 @@ public class MovableObject implements MovableInterface
   }
 
 
-  // *************************************************************
-  // *** compass and degree methods ******************************
-  // *************************************************************
-    
+  
   public double degreesToRadians(double degrees)
   {
       return degrees*Math.PI/180;
@@ -827,70 +690,48 @@ public class MovableObject implements MovableInterface
 
 
 
-  // *************************************************************
-  // *** move methods ********************************************
-  // *************************************************************
 
-  // FINISH ME
   public void moveUpBy(float amount)
   {
-    // get your current y value and subtract amount
     setY(getY()-amount);
   }
 
-  // FINISH ME
   public void moveUp()
   {
-    // get your current y value and subtract speedY
     setY(getY()-speedY);
   }
 
-
-  // FINISH ME
   public void moveDownBy(float amount)
   {
-    // get your current y value and add ??????  
     setY(getY() + amount);
   }
 
-  // FINISH ME
   public void moveDown()
   {
-    // get your current y value and add speedY
     setY(getY()+speedY);
   }
 
-
-  // FINISH ME
   public void moveLeft()
   {
-    // get your current x value and subtract speedX  
     setX(getX()-speedX);
   }
 
-
-  // FINISH ME
   public void moveLeftBy(float amount)
   {
     setX(getX()-amount);
   }
 
 
-  // FINISH ME
   public void moveRight()
   {
     setX(getX()+speedX);
   }
 
-  // FINISH ME
   public void moveRightBy(float amount)
   {
     setX(getX()+amount);
   }
 
-
-  // FINISH ME
-  // moves the object using speedX and speedY
   public void move()
   {
     setX(getX()+speedX);
@@ -898,7 +739,6 @@ public class MovableObject implements MovableInterface
   }
 
 
-  // FINISH ME
   public void moveTo(int x, int y)
   {
     setX(x);
@@ -906,10 +746,9 @@ public class MovableObject implements MovableInterface
   }
 
   
-  // move using the direction and speed
   public void moveInCurrentDirection()
   {
-    int   currentDirection = getDirection();// get the compass direction
+    int   currentDirection = getDirection();
     float currentDegrees = getDegreesFromCompassDirection(currentDirection);
     
     double radDegrees = 0;
@@ -921,7 +760,6 @@ public class MovableObject implements MovableInterface
             
       if (currentDirection >= 0 && currentDirection <= 90)
       {
-        // this works
         currentDegrees = 360-currentDegrees;
         radDegrees = degreesToRadians(currentDegrees);
         newX = xRatio*((float) Math.abs(Math.cos(radDegrees)*speed));
@@ -940,7 +778,6 @@ public class MovableObject implements MovableInterface
       }
       else if (currentDirection > 180 && currentDirection <= 270)
       {
-        // this works
         currentDegrees = 270-currentDegrees;
         radDegrees = degreesToRadians(currentDegrees);
         newX = xRatio*((float) Math.abs(Math.sin(radDegrees)*speed));
@@ -950,7 +787,6 @@ public class MovableObject implements MovableInterface
       }
       else if (currentDirection > 270 && currentDirection < 360)
       {
-        // this works
         currentDegrees = 180-currentDegrees;
         radDegrees = degreesToRadians(currentDegrees);
         newX = xRatio*((float) Math.abs(Math.cos(radDegrees)*speed));
@@ -994,12 +830,6 @@ public class MovableObject implements MovableInterface
   }
 
 
-
-  // *************************************************************
-  // *** draw methods ********************************************
-  // *************************************************************
-    
-
     // draws the image using the direction
   public void draw2(Graphics g)
   {
@@ -1034,7 +864,7 @@ public class MovableObject implements MovableInterface
       mainPanel);
   }
 
-}  // end of class MovableObject
+}
 
 /*
 boolean drawImage(Image img, int x, int y, ImageObserver observer)

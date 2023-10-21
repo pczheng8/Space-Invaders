@@ -7,20 +7,8 @@ import java.awt.image.BufferedImage;
 
 public class Ship extends MovableObject {
 
-	// We can override any method
-	// We can override any method
-	// We can override any method
-	// We can override any method that we want to change or
-	// we can write completely new methods
-
-	// We don't inherit constructors	
-	// We don't inherit constructors
-	// We don't inherit constructors
-	// We don't inherit constructors, so we have to write our own
-	// We can call super to call our super class constructor    
     public Ship(JPanel mainPanel, String filename, Image image, float x, float y, int width, int height)
     {
-    	// FINISH ME
     	super(mainPanel, filename, image, x, y, width, height);
  	}
 
