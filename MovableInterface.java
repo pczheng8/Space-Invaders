@@ -1,6 +1,6 @@
 public interface MovableInterface {
-    
-    
+
+
     public abstract float getX();
 
     public abstract void setX(float x);
@@ -24,18 +24,16 @@ public interface MovableInterface {
     public void setDirection(int direction);
 
 
-
     public abstract float getTime();
-    
-	  public abstract void setTime(float time);
 
-  
+    public abstract void setTime(float time);
+
+
     public abstract boolean getHidden();
 
     public abstract boolean isHidden();
 
     public abstract void setHidden(boolean hidden);
-  
 
 
     public int getSpeedX();
@@ -45,23 +43,20 @@ public interface MovableInterface {
     public int getSpeedY();
 
     public void setSpeedY(int speedY);
-    	
+
     public void setSpeedXY(int speedX, int speedY);
-
-
 
 
     public void setSpeed(int speed);
 
     public int getSpeed();
-  
-  
 
-		public void setCloaked(boolean cloaked);	
 
-		public boolean getCloaked();
-	
-		public boolean isCloaked();
+    public void setCloaked(boolean cloaked);
 
-    
+    public boolean getCloaked();
+
+    public boolean isCloaked();
+
+
 }
