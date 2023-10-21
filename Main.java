@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 
 public class Main extends JFrame implements WindowListener 
 {
-  // these constants should reall be in an interface
   public static final int alienShiftXValue = 10;
   public static final int alienShiftYValue = 5;
   public static final float alienShiftTimeStart = 600.0f;
@@ -28,8 +27,6 @@ public class Main extends JFrame implements WindowListener
   
   private int level = 1;
   
-  
-  // screen variables (these can change)
   
   private int screenWidth  = 500;
   private int indentWidth  = 20;
@@ -57,10 +54,10 @@ public class Main extends JFrame implements WindowListener
 
   // define JPanels for a BorderLayout
   JPanel     northPanel;   // this is the message panel
-  SouthPanel southPanel;   // put your buttons on this panel
-  JPanel     westPanel;    // this panel will be empty for now
+  SouthPanel southPanel;
+  JPanel     westPanel;
   boolean    showWestPanel = false;
-  JPanel     eastPanel;    // this panel will be empty for now
+  JPanel     eastPanel;
   boolean    showEastPanel = false;
 
   DrawPanel  centerPanel;  // this will be the panel with all the drawing of MovableObjects
@@ -75,140 +72,82 @@ public class Main extends JFrame implements WindowListener
   JButton exitButton;
 
   
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *** declare your arrays and beginning MovableObjects ********************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
   
-  private MovableObject ship;  // this will be controlled by the user (moves left and right)
+  private MovableObject ship;
 
   private int shipDistanceFromBottomOfScreen = 95;
   private int barricadeDistanceFromBottomOfScreen = 150;
   
-  private Image shipImage;  // we need one image to load
+  private Image shipImage;
 
-  private Image alienImage;  // we need one image to load and all aliens can use this 1 image
+  private Image alienImage;
 
-  private Image shipBulletImage;  // we need one image to load and all ship bullets can use this 1 image
+  private Image shipBulletImage;
 
-  private Image alienBulletImage;  // we need one image to load and all alien bullets can use this 1 image
+  private Image alienBulletImage;
 
-  private Image explosionImage;  // we need one image to load and all explosions can use this 1 image
+  private Image explosionImage;
 
   private Image barricadeImage;
   
-    
-  // we need to use a 2 dimensional array
 
   private MovableObject [][] aliens;
 
   private int numAliensHorizontal = 15;
   private int numAliensVertical = 6;
-  
-  // An ArrayList of alien bullets
+
   private ArrayList<MovableObject> alienBullets;
-  
-  // An ArrayList of ship bullets
   private ArrayList<MovableObject> shipBullets;
-
-  // An ArrayList of explosions
   private ArrayList<MovableObject> explosions;
-
-  // An ArrayList of barricade objects
   private ArrayList<MovableObject> barricades;
 
-  // wins, losses, and score  
   private int score;
   private int wins = 0;
   private int losses = 0;
 
   private int pointsForHittingAnAlien = 5;
 
-  // FINISH ME
-  // PUT YOUR NAME ON THIS!!!!!!!!!
-  private String showMessage = "Space Invaders the Classic Version by Peter Zheng";
+  private String showMessage = "Space Invaders by Peter Zheng";
   
-  // thread for the runButton
   Thread runThread = null;
-  int threadDelay = 20;  // the paintComponent method will be called every 25 milliseconds
+  int threadDelay = 20;
 
 
-
-  // 
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *** alien methods *******************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-
-  // turn off all aliens
   public void turnOffAliens()
   {
-    // FINISH ME
-    // use nested loops to loop through all of the aliens
-    // USE maxAliensVertical for the r (row)
-    // USE maxAliensHorizontal for the c (col)
     for (int r=0; r<maxAliensVertical; r++ )
     {
       for (int c=0; c<maxAliensHorizontal; c++ )
       {
-        // FINISH ME
-        // CHANGE the hidden attribute to true
-        // aliens[r][c].?????????;
         aliens[r][c].setHidden(true);
       }
     }
   }
   
-  
-  // turn on the aliens that will show on the screen
+
   public void turnOnVisibleAliens()
   {
-    // FINISH ME
-    // use nested loops to loop through all of the aliens shown on the screen
-    // USE numAliensVertical for the r (row)
-    // USE numAliensHorizontal for the c (col)
-    // and set the Y value of all aliens on each row to the same y value
-    // and set the hidden property to false
     
     for (int r=0; r<numAliensVertical;  r++ )
     {
       for (int c=0; c<numAliensHorizontal;  c++ )
       {
         aliens[r][c].setY(aliens[r][0].getY());
-                
-        // FINISH ME
-        // CHANGE the hidden attribute to false
         aliens[r][c].setHidden(false);
       }
     }   
   }
   
-  
-  // make sure all possible aliens are set in case the screen is enlarged 
+
   public void turnOnAliensShift()
   {
-    // FINISH ME
-    // use nested loops to loop through all of the aliens
-    // USE maxAliensVertical for the r (row)
-    // USE maxAliensHorizontal for the c (col)
-    
     for (int r=0; r<maxAliensVertical;  r++ )
     {
       for (int c=0; c<maxAliensHorizontal;  c++ )
       {
         aliens[r][c].setShiftTimeStart(alienShiftTimeStart);
-        aliens[r][c].setShiftXValue(alienShiftXValue);  // shift left or right in pixels
-        aliens[r][c].setShiftYValue(alienShiftYValue);  // shift down in pixels
+        aliens[r][c].setShiftXValue(alienShiftXValue);
+        aliens[r][c].setShiftYValue(alienShiftYValue);
         aliens[r][c].setShiftTimeInterval(threadDelay); // every 20 ms subtract from shift time
         aliens[r][c].setShiftTime(alienShiftTimeStart); // amount of time left before the shift
       }
@@ -227,12 +166,6 @@ public class Main extends JFrame implements WindowListener
       x = 20;
       for (int c=0; c < maxAliensHorizontal; c++)
       {
-        // FINISH ME
-        // change the x and y values of the alien to
-        // the new values stored in x and y
-        // call a method
-        // aliens[r][c].???????;
-        // aliens[r][c].???????;
         aliens[r][c].setX(x);
         aliens[r][c].setY(y);
         x = x + 55;                 
@@ -244,18 +177,12 @@ public class Main extends JFrame implements WindowListener
 
   public void resetAllAliensXValue()
   {
-    // we will only show some of them (what fits on the screen)
-    // we will never get rid of them, but rather flip the hidden flag
     int x = 20;
     for (int r=0; r < maxAliensVertical; r++)
     {
       x = 20;
       for (int c=0; c < maxAliensHorizontal; c++)
       {
-        // FINISH ME
-        // set the x value of the alien to x
-        // call a method
-        // aliens[r][c].???????;
         aliens[r][c].setX(x);
         x = x + 55;                 
       }
@@ -264,17 +191,12 @@ public class Main extends JFrame implements WindowListener
 
   public void resetAllAliensYValue()
   {
-    // we will only show some of them (what fits on the screen)
-    // we will never get rid of them, but rather flip the hidden flag
     float y = aliens[0][0].getY();
     
     for (int r=0; r < maxAliensVertical; r++)
     {
       for (int c=0; c < maxAliensHorizontal; c++)
       {
-        // FINISH ME
-        // set the y value to y
-        // aliens[r][c].??????;
         aliens[r][c].setY(y);
       }
       y = y + 55;       
@@ -283,8 +205,6 @@ public class Main extends JFrame implements WindowListener
   
   public void resetAllAliensXYValue()
   {
-    // we will only show some of them (what fits on the screen)
-    // we will never get rid of them, but rather flip the hidden flag
     int x = 20;
     float y = aliens[0][0].getY();
     for (int r=0; r < maxAliensVertical; r++)
@@ -292,9 +212,6 @@ public class Main extends JFrame implements WindowListener
       x = 20;
       for (int c=0; c < maxAliensHorizontal; c++)
       {
-        // FINISH ME
-        // set the x and y value of the alien to x,y
-        // aliens[r][c].????????;
         aliens[r][c].setXY(x, y);
         x = x + 55;                 
       }
@@ -305,16 +222,8 @@ public class Main extends JFrame implements WindowListener
   
   public void createAllAliens()
   {
-    
-    // create all of the aliens
-    // create the 2D array to hold all the possible aliens
-    // actually we have pointers to MovableObject objects that are set to null
-    // FINISH ME
-    // create a 2d array that can refer to Alien objects 
     aliens = new Alien[maxAliensVertical][maxAliensHorizontal];
 
-    // we will only show some of them (what fits on the screen)
-    // we will never get rid of them, but rather flip the hidden flag
     int x = 20;
     int y = 10;
     for (int r=0; r < maxAliensVertical; r++)
@@ -339,23 +248,15 @@ public class Main extends JFrame implements WindowListener
   public int numAliensLeft()
   {
     int count = 0;
-    // FINISH ME
-    // use nested loops to loop through all of the aliens shown on the screen
-    // USE numAliensVertical for the r (row)
-    // USE numAliensHorizontal for the c (col)
     for (int r =0; r<numAliensVertical;  r++ )
     {
       for (int c=0; c<numAliensHorizontal;  c++ )
       {
-        // FINISH ME
-        // if this alien is NOT hidden, add 1 to your count
-        // ?????????????????
         if(!aliens[r][c].getHidden())
           count++;
       }
     }
-    
-    // FINISH ME
+
     return count;
   }
 
@@ -407,19 +308,6 @@ public class Main extends JFrame implements WindowListener
 
 
 
-
-
-  // 
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *** create your arrays and beginning MovableObjects (new) ***************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  
     
   public void initMovableObjects()
   {
@@ -439,40 +327,13 @@ public class Main extends JFrame implements WindowListener
       System.out.println("CREATING all objects");
       createAllObjects = false;
 
-      // FINISH ME
-      // FIND SUITABLE PICTURES FOR YOUR ship, aliens, bullets, and explosions 
-      // your image files can be of type  gif, jpg, or png  
-      // replace Actor.gif and Bug.gif with your image
-      
-
-      // FINISH ME
-      // get an image for the ship
-      // call loadImage and pass it "ship.png"
       shipImage = loadImage("ship.png");
-    
-      // FINISH ME
-      // get an image for the ship bullet
       shipBulletImage = loadImage("bullet.png");
-
-
-      // FINISH ME
-      // get an image for the alien
       alienImage = loadImage("alien.png");
-
-      // FINISH ME
-      // get an image for the alien bullet
       alienBulletImage = loadImage("bullet.png");
-
-      // FINISH ME
-      // get an image for the explosion
       explosionImage = loadImage("explosion.png");
-
-      // FINISH ME
       barricadeImage = loadImage("barricade.png");
 
-
-    // FINISH ME
-    // create the ship
     ship = new Ship(centerPanel, "ship.png", shipImage, screenWidth/2-25,screenHeight-shipDistanceFromBottomOfScreen, 50,50);     
     System.out.println("creating ship");
     
@@ -482,26 +343,9 @@ public class Main extends JFrame implements WindowListener
     turnOnAliensShift();
 
 
-    // FINISH ME
-    // you will need to create all of your ArrayList objects
-    // THEY NEED TO BE OF TYPE MovableObject
-    
-    // An ArrayList of alien bullets  USE <MovableObject>
-    // FINISH ME
     alienBullets = new ArrayList<MovableObject>();
-  
-  
-    // FINISH ME
-    // An ArrayList of ship bullets  <MovableObject>
     shipBullets  = new ArrayList<MovableObject>();
-
-
-    // FINISH ME
-    // An ArrayList of explosions  <MovableObject>
     explosions = new ArrayList<MovableObject>();
-
-    // FINISH ME
-    // An ArrayList of barricade objects
     barricades = new ArrayList<MovableObject>();
     
     int xx = 100;
@@ -533,14 +377,11 @@ public class Main extends JFrame implements WindowListener
     else
     {
       resetAllAliens();
-      
-      // FINISH ME
-      // clear all of your lists
+
       alienBullets.clear();
       shipBullets.clear();
       explosions.clear();
       
-      // show the barricades
       for (int i=0; i<barricades.size(); i++)
       {
         barricades.get(i).setHidden(false);
@@ -557,8 +398,6 @@ public class Main extends JFrame implements WindowListener
   
   barricadeDistanceFromBottomOfScreen = (int) ship.getY() - 60;     
 
-
-  // show the barricades
   for (int i=0; i<barricades.size(); i++)
   {
     barricades.get(i).setHidden(false);
@@ -570,36 +409,28 @@ public class Main extends JFrame implements WindowListener
     
     turnOnVisibleAliens();
 
-    // FINISH ME
-    // Set the ship's hidden attribute to false
-    // ship.???????;  
     ship.setHidden(false);
       
   }
 
 
-  
-  // ***** public void initialize *****  
   public void initialize( )
   {
     back = null;
     gameOver = true;
         
     keys = new boolean[5];
-    
-    // create the JButton objects
+
     runButton   = new JButton("Run");
     pauseButton = new JButton("Pause");
     stopButton  = new JButton("Stop");
     exitButton  = new JButton("Exit");
 
-    // create a mainPanel for components
     mainPanel = new JPanel();
 
-    // ***** create JPanels for a BorderLayout *****
     northPanel   = new JPanel();
     southPanel   = new SouthPanel();
-    southPanel.setListeners(); // this will add listeners for the JButton objects
+    southPanel.setListeners();
   
   
     if (showWestPanel)
@@ -628,19 +459,14 @@ public class Main extends JFrame implements WindowListener
         eastPanel.setBackground(new Color(115,205,255));
     }
 
-
-    // add buttons to southPanel
     southPanel.add(runButton);
     southPanel.add(pauseButton);
     southPanel.add(stopButton);
     southPanel.add(exitButton);
 
-    // FINISH ME
-    // PUT YOUR NAME ON THIS
-    northText = new JLabel("Space Invaders Classic by Peter Zheng");
+    northText = new JLabel("Space Invaders by Peter Zheng");
     northPanel.add(northText);
 
-    // ***** add the panels to the mainPanel 5 areas *****
     mainPanel.add(northPanel,BorderLayout.NORTH);
     mainPanel.add(southPanel,BorderLayout.SOUTH);
     if (showEastPanel)
@@ -660,18 +486,14 @@ public class Main extends JFrame implements WindowListener
   
     centerPanel.repaint();
 
-    // make the mainPanel be the main content area and show it
     setContentPane(mainPanel);
     
-    setVisible(true);  // always show the screen last
+    setVisible(true);
 
-
-    // focus the southPanel so that we can receive key strokes
     southPanel.setFocusable(true);
     southPanel.requestFocus();
-  }   // end of public void initialize
+  }
 
-  // ***** default constructor *****
   public Main( )
   {
     setSize(screenWidth,screenHeight);
@@ -679,7 +501,6 @@ public class Main extends JFrame implements WindowListener
     setTitle("Space Invaders Classic");
     addWindowListener(this);
   
-    // initialize variables
     initialize( );
   }
 
@@ -734,8 +555,6 @@ public class Main extends JFrame implements WindowListener
    public void windowClosing(WindowEvent e)
    {
      System.out.println("The frame is closing.....");
-     //The following line of code 
-     //specifies that the frame should be closed
      ((Window)e.getSource()).dispose();
    }
 
@@ -775,11 +594,8 @@ public class Main extends JFrame implements WindowListener
 
 class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
 {
-  // start of actionPerformed (ActionListener interface)
-  // handle button clicks here
   public SouthPanel()
   {
-    // allow buttons to listen for clicks
     super();
   }
   
@@ -794,7 +610,7 @@ class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
   
   public void actionPerformed(ActionEvent e)
   {
-    Object source = e.getSource(); // points to the object that got clicked
+    Object source = e.getSource();
     String command = e.getActionCommand();
     
     if (source==exitButton)
@@ -812,14 +628,12 @@ class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
       if (!gameOver)  
         if (runThread != null)
           if (runThread.isAlive())
-            return;  // if the game is active, ignore the click
+            return;
       
       if (runThread==null)
       {
-        runThread = new Thread(this); // the game is inactive, so let's play
+        runThread = new Thread(this);
       }
-    
-      // init the screen
 
       initialize( );
     
@@ -827,14 +641,13 @@ class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
 
       showMessage = "";
       centerPanel.setShowGameStartScreen(false);
-    
-      // start the game
+
       if (!runThread.isAlive())
         runThread.start();
         gameOver = false;
           gamePaused = false;
     }
-    else if (source==stopButton)  // they want to stop the game
+    else if (source==stopButton)
     {
         gameOver = true;
         gamePaused = false;
@@ -843,7 +656,6 @@ class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
       runThread.stop();
       runThread = null;
     }
-    // init the screen
     
     initialize( );
     
@@ -852,7 +664,7 @@ class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
     ship.setXY(screenWidth/2-25,screenHeight-shipDistanceFromBottomOfScreen);
     centerPanel.repaint();
   }
-  else if (source==pauseButton)  // they want to pause the game
+  else if (source==pauseButton)
     {
       System.out.println("paused button pressed command ="+command);
       showMessage = "";
@@ -863,7 +675,6 @@ class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
         showMessage = "";
         centerPanel.setShowGameStartScreen(false);
         centerPanel.repaint();
-        // focus the southPanel so that we can receive key strokes
         southPanel.setFocusable(true);
         southPanel.requestFocus();
       }
@@ -874,24 +685,20 @@ class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
         showMessage = "";
         centerPanel.setShowGameStartScreen(true);
         centerPanel.repaint();
-        // focus the southPanel so that we can receive key strokes
         southPanel.setFocusable(true);
         southPanel.requestFocus();
       }
 
     }
-  }  // end of actionPerformed
+  }
 
 
-  // thread to delay for the runButton
-  // do it all here so we have control of the buttons
   public void run()
   {
     try
     {
       while(true)
       {          
-         // this will redraw everything on the centerPanel
          centerPanel.repaint();
 
          setFocusable(true);
@@ -906,12 +713,10 @@ class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
       }
   }
 
-  // start of keyTyped (KeyListener interface)
   public void keyTyped(KeyEvent e)
   {
-  }  // end of keyTyped(KeyEvent e)
+  }
 
-  // start of keyPressed (KeyListener interface)
   public void keyPressed(KeyEvent e)
   {
     keys[2] = false;
@@ -953,9 +758,8 @@ class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
       keys[4]=true;
     }
   
-  }  // end of keyPressed(KeyEvent e)
+  }
 
-  // start of keyReleased (KeyListener interface)
   public void keyReleased(KeyEvent e)
   {
     int key = e.getKeyCode();
@@ -982,22 +786,14 @@ class SouthPanel extends JPanel implements KeyListener,ActionListener, Runnable
     {
       keys[4]=false;
     }
-  }  // end of keyReleased(KeyEvent e)
+  }
 
   
   
-} // end of centerPanel class
+}
 
 
 
-// *************************************************************************************
-// *************************************************************************************
-// *************************************************************************************
-// *************************************************************************************
-// this is the panel for the game  (this is an inner class)
-// *************************************************************************************
-// *************************************************************************************
-// *************************************************************************************
 class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
 {
   String testXY="X= Y=";
@@ -1061,9 +857,7 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
   {
     
       MovableObject bullet = new ShipBullet(centerPanel, "bullet.png", shipBulletImage, Math.round(ship.getX()+ship.getWidth()/2 - 25), Math.round(ship.getY() - 50), 50,30);
-      
-      // FINISH ME
-      // add the bullet to the shipBullets ArrayList
+
       shipBullets.add(bullet);
       
   }
@@ -1072,17 +866,13 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
   public void createAnAlienBullet(MovableObject alien)
   {
     
-      // FINISH ME
       // create an alien bullet below the given alien and center it
       // set its speedY to be greater than the alien's speedY
-      // NOTE: an alien should only be allowed to fire a bullet if there is
-      //       NO alien in front of it (or it would shoot one of its own)
+      // an alien should only be allowed to fire a bullet if there is
+      // no alien in front of it (or it would shoot one of its own)
       
       MovableObject bullet = new AlienBullet(centerPanel, "bullet.png", alienBulletImage, Math.round(alien.getX()+alien.getWidth()/2 - 25), Math.round(alien.getY() + alien.getHeight() + 3), 25,40);
-      
-      // FINISH ME
-      // add the bullet to the alienBullets ArrayList
-      // ???????????
+
     alienBullets.add(bullet);
       
   }
@@ -1091,7 +881,6 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
   public void createRandomAlienBullets()
   {
     
-      // FINISH ME
       // create randomly alien bullets below the alien and center it
       // we will not create a bullet if there is another alien in front of it
       for (int r=0; r < numAliensVertical; r++)
@@ -1100,29 +889,24 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
         {
             MovableObject alien = aliens[r][c];
             
+            int chanceValue = (int)(Math.random() * totalChancesToCreateAnAlienBullet);
             
-            // FINISH ME
-            // create a random value between 0 and totalChancesToCreateAnAlienBullet-1 inclusive
-            int chanceValue = (int)(Math.random() * totalChancesToCreateAnAlienBullet);  // creates a random number between 0 and ?? inclusive
-            
-            if (chanceValue == 2)  // if the number happens to be the lucky number 2
+            if (chanceValue == 2)
             {
             
               boolean canFire = false;
 
-              if (r==numAliensVertical-1) // its on the bottom row
+              if (r==numAliensVertical-1)
               {
                 canFire = true;
               }
-              else if (aliens[r+1][c].isHidden()) // nothing in front
+              else if (aliens[r+1][c].isHidden())
               {
                 canFire = true;
               }
             
               if (alien != null && !alien.isHidden() && canFire)
-              { 
-                // FINISH ME
-                // call the method createAnAlienBullet and pass it the alien        
+              {      
                 createAnAlienBullet(alien);
               }
             }
@@ -1134,38 +918,13 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
 
   public void createAnExplosion(MovableObject object)
   {
-    
-      // FINISH ME
-      // create an explosion on the given object using the object's x,y,width, and height values
       
       Explosion explosion = new Explosion(centerPanel, "explosion.png", explosionImage, object.getXRounded(), object.getYRounded(), object.getWidth(),object.getHeight());
 
-
-      // FINISH ME
-      // DO THIS LATER
-      // set the time for the explosion to be on the screen
       explosion.setTime(300);
-      
-      
-      // FINISH ME
-      // DO THIS LATER
-      // add the explosion to the explosions ArrayList
       explosions.add(explosion);
       
   }
-
-
-
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *** Methods to check for a COLLISION of your objects on the screen ******************
-  // *************************************************************************************
-  // *** You will need to call these methods from the main event loop ********************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
 
 
   public boolean isCollisionBetweenShipAndAliens()
@@ -1177,16 +936,9 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
             MovableObject alien = aliens[r][c];
             if (!alien.isHidden() && alien.intersects(ship))
             {
-              // FINISH ME
-              // Create an Explosion (call a method) over the ship
               createAnExplosion(ship);
               
-              // FINISH ME
-              // set the hidden flag to true
               ship.setHidden(true);
-              
-              // FINISH ME
-              // set the hidden flag to true
               alien.setHidden(true);
               
               return true;              
@@ -1211,8 +963,6 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
 
           for (int c=0; !finished && c < maxAliensHorizontal; c++)
           {
-            // FINISH ME
-            // see if the shipBullet intersects aliens[r][c]
             if (!aliens[r][c].isHidden() && 
               shipBullet.intersects(aliens[r][c])
                )
@@ -1372,22 +1122,6 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
   }   
 
 
-
-
-
-
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *** Methods to draw all of your objects on the screen *******************************
-  // *************************************************************************************
-  // *** You will need to call these methods *********************************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
-
-
   public void drawAliens(Graphics gMemory)
   {
     for (int r=0; r < numAliensVertical; r++)
@@ -1397,7 +1131,6 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
             MovableObject alien = aliens[r][c];
             if (alien != null)
             {           
-              // draw the alien
               alien.draw(gMemory);
             }
         }
@@ -1495,10 +1228,6 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
 
   public void moveShipBullets()
   {
-    // FINISH ME
-    // move your ship bullets  you will need one loop
-    // they should move upwards towards the aliens
-    // if they go off the screen, remove them from the ArrayList
     for (int i=0; i<shipBullets.size(); i++)
     {
       shipBullets.get(i).move();
@@ -1516,25 +1245,13 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
 
   public void moveExplosions()
   {
-    // FINISH ME (Optional)
-    // DO THIS METHOD LATER
-    // move your explosions  you will need one loop
     for(MovableObject e : explosions)
       e.move();
-    
   }   
 
 
   public void updateTimeForExplosions()
   {
-    // FINISH ME
-    // DO THIS METHOD LATER
-    // update the time for each explosion (one loop)
-    // if the time is up, remove them from your list
-    // threadDelay is set to 20 ms, the amount of time that passes
-    //    between each call to paintComponent
-    // you will need an indexed for loop since you cannot remove objects
-    //     when using a for each loop
     
     for (int i=0; i<explosions.size(); i++)   
     {
@@ -1551,34 +1268,17 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
     
   }   
 
-
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *** this Method shows the screen when the game is not active ************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
     
   public void showScreen(Graphics2D g2, boolean resetAllObjectsToStart)
   {
-      // System.out.println("inside showScreen");
             
       back = (BufferedImage)(createImage(getWidth(),getHeight()));
 
-      // create a graphics reference to the back ground image
-      // we will draw all changes on the background image
       Graphics gMemory = back.createGraphics();
 
-      // clear the screen
       gMemory.setColor(Color.BLACK);
       gMemory.fillRect(0,0,getWidth(),getHeight());
 
- 
-      // reset the number of aliens on the screen
-      // if the screen size has changed
 
       if (screenWidth != getWidth() || screenHeight != getHeight())
       {           
@@ -1586,23 +1286,9 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
         screenHeight = getHeight();
       }
 
-
-      // FINISH ME
-      // DO THESE METHOD CALLS LATER
-      // draw all of the objects
-      // CALL a METHOD, do not write the method code here
-            
-      // draw the aliens
-      // call a method
       drawAliens(gMemory);
       drawAlienBullets(gMemory);
-    
-      // draw the shipBullets
-      // call a method
       drawShipBullets(gMemory);
-    
-      // draw the explosions
-      // call a method
       drawExplosions(gMemory);
         
       if (doPositioning)
@@ -1614,22 +1300,17 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
 
       ship.setY(screenHeight-shipDistanceFromBottomOfScreen);
 
-      // draw the ship
-      // call a method
       drawShip(gMemory);
 
       positionBarricades();
 
       barricadeDistanceFromBottomOfScreen = (int) ship.getY() - 60;
-      
-      // loop through the barricades     
+   
       for (int i=0; i<barricades.size(); i++)
       {
         barricades.get(i).setY(barricadeDistanceFromBottomOfScreen);
       }
 
-      // draw the barricades
-      // call a method
       drawBarricades(gMemory);
       
       if (barricades!=null && barricades.size()>0)
@@ -1647,13 +1328,10 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
       }
       
       Font font;
-      
-      // draw the score, level, etc.
+
       gMemory.setColor(Color.RED);
       font = new Font("Courier New",Font.BOLD,16); 
       
-      // FINISH ME
-      // draw your score, wins, and losses
       gMemory.drawString("Score: " + score + "  Wins: " + wins + "  Losses: " + losses + "  Level: "+level,10,10);
       
  
@@ -1662,24 +1340,9 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
 
       gMemory.drawString(showMessage,gameOverMessageXValue,gameOverMessageYValue);
 
-    
-      // *** show the screen by copying the image to the graphics display ********
       g2.drawImage(back, null, 0, 0); 
     
   }
-
-
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // *************************************************************************************
-  // ***  this is the main event loop for the game ***************************************
-  // *************************************************************************************
-  // ***  check for collisions, move all objects, and draw all screen objects ************
-  // *************************************************************************************
-  // ***  add to your score, checks for a win and check for a loss ***********************
-  // *************************************************************************************
-  // *************************************************************************************
 
 
   
@@ -1706,25 +1369,12 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
       return;
     }
 
-    //take a snap shop of the current screen and save it as an image
-    //that is the exact same width and height as the current screen
     back = (BufferedImage)(createImage(getWidth(),getHeight()));
 
-    //create a graphics reference to the back ground image
-    //we will draw all changes on the background image
     Graphics gMemory = back.createGraphics();
-
-    // clear the screen
+    
     gMemory.setColor(Color.BLACK);
     gMemory.fillRect(0,0,getWidth(),getHeight());
-
-    // System.out.println("game is playing");
-    
-    // DO NOT USE THESE 3 commands here unless you want to display 
-    //   the coordinates of the mouse pointer
-    //gMemory.setColor(Color.RED);
-    //gMemory.drawString(testXY,10,50);
-    //gMemory.setColor(Color.BLACK);
 
     if (screenWidth != getWidth() || screenHeight != getHeight())
     {           
@@ -1733,11 +1383,9 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
 
       resetAllAliensWithScreenResize();
         
-      // reset the position of the ship
       ship.setY(screenHeight-shipDistanceFromBottomOfScreen);
       barricadeDistanceFromBottomOfScreen = (int) ship.getY() - 60;
       
-      // loop through the barricades     
       for (int i=0; i<barricades.size(); i++)
       {
         barricades.get(i).setY(barricadeDistanceFromBottomOfScreen);
@@ -1745,7 +1393,6 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
     }
     else
     {
-      // reset the position of the ship
       ship.setY(screenHeight-shipDistanceFromBottomOfScreen);
       barricadeDistanceFromBottomOfScreen = (int) ship.getY() - 60;     
       for (int i=0; i<barricades.size(); i++)
@@ -1755,16 +1402,6 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
       
     }
 
-
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *** Move your ship ******************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
     
     // move the ship
     if (keys[0] && ship != null) // UP
@@ -1789,139 +1426,38 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
     }
     else if (keys[4] && ship != null) // SPACE
     {
-      // FINISH ME
-      // fire a bullet
-      // CALL A method to do this
       
-      
-      keys[4] = false; // this stops it from creating several bullets in the time frame
+      keys[4] = false; // stops it from creating several bullets in the time frame
     
       
       createAShipBullet();
       
     }
 
- 
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // ***  check for collisions here  *****************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
     
-    
-    // FINISH ME
-    // DO THIS METHOD CALL LATER
-    // call the method to check for a collision 
-    // between the ship bullets and aliens
-    // CALL a METHOD, do not write the method code here
     isCollisionBetweenShipBulletsAndAliens();
 
-    
-    // FINISH ME
-    // DO THIS METHOD CALL LATER
-    // call the method to check for a collision 
-    // between the ship bullets and alien bullets
-    // CALL a METHOD, do not write the method code here
     isCollisionBetweenShipBulletsAndAlienBullets();
     
-
-    // FINISH ME
-    // DO THIS METHOD CALL LATER
-    // call the method to check for a collision 
-    // between the barricades and alien bullets
-    // CALL a METHOD, do not write the method code here
     isCollisionBetweenBarricadesAndAlienBullets();
 
-
-    // FINISH ME
-    // DO THIS METHOD CALL LATER
-    // call the method to check for a collision 
-    // between the barricades and the aliens
-    // CALL a METHOD, do not write the method code here
     isCollisionBetweenBarricadesAndAliens();
 
 
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // ***  move all of your objects here, but not the ship ********************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-
-    // FINISH ME
-    // call the method to move your aliens
-    // ??????
     moveAliens();
 
-
-    // FINISH ME
-    // call the method to move your alien bullets
     moveAlienBullets();
-    
 
-
-    
-    // FINISH ME
-    // DO THIS METHOD CALL LATER
-    // call a method to move your ship bullets
-    // CALL a METHOD, do not write the method code here
     moveShipBullets();
 
-
-
-    // FINISH ME (OPTIONAL)
-    // DO THIS METHOD CALL LATER
-    // call your method to move your explosions 
-    // (optional to make them get bigger)
-    // CALL a METHOD, do not write the method code here
-    // ?????????
     moveExplosions();
 
-
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *** Create any random objects *******************************************
-    // *** or use any graphic commands to draw lines, ovals, rects, etc. *******
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************    
-    // FINISH ME
-    // call a method to create random bullets for your aliens
+    
     createRandomAlienBullets();
 
-
-
-    // FINISH ME
-    // DO THIS LATER
-    // call a method to update the time for your explosions
-    //????????????????
     updateTimeForExplosions();
-    
-    
 
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-    // *** DRAW all your objects here using gMemory ****************************
-    // *** or use any graphic commands to draw lines, ovals, rects, etc. *******
-    // *************************************************************************
-    // *************************************************************************
-    // *************************************************************************
-
-    // FINISH ME
-    // DO THIS METHOD CALL LATER
-    // call methods to draw your alien bullets, ship bullets, and explosions
-    // CALL METHODS, do not write the method code here
+    
     drawShipBullets(g2);
     drawAlienBullets(g2);
     drawExplosions(g2);
@@ -1934,7 +1470,6 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
     Font font;
 
     
-    // check to see if you win and if so, show a message and set gameOver=true;
     if (numAliensLeft()==0 || score >= winningScore)
     {
       gMemory.setColor(Color.RED);
@@ -1950,11 +1485,6 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
         level++;
     }
       
-    // fix me
-    // it should only look at visible aliens
-    
-    
-    // else if (aliens[numAliensVertical-1][0].getY()+aliens[numAliensVertical-1][0].getHeight() >= ship.getY())
     
     else if (findFrontAlienPosition()>ship.getY() ||
            isCollisionBetweenShipAndAliens()
@@ -1989,25 +1519,19 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
       losses++;               
     }
 
-    
-    // draw the score, level, etc.
+
     gMemory.setColor(Color.RED);
     font = new Font("Courier New",Font.BOLD,16); 
     
     
-      
-    // FINISH ME
-    // draw your score, wins, and losses
     String scoreAsStr = ""+score;
     if (scoreAsStr.length()< 2)
       scoreAsStr = " " + scoreAsStr;
     gMemory.drawString("Score: " + scoreAsStr+ "  Wins: " + wins + "  Losses: "+losses+"  Level: "+level,10,10);
       
 
-      
-    // *** show the screen by copying the image to the graphics display ********
       g2.drawImage(back, null, 0, 0); 
-  }  // end of public void paintComponent(Graphics g)
+  }
 
 
 
@@ -2019,67 +1543,47 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
  
  
  
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *** if a key is pressed *************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
   public void keyPressed(String keyString)
   {
-    // nothing to do, as we will handle it else where
+    // nothing to do, as we will handle it elsewhere
     //System.out.println("Key is pressed inside centerPanel="+keyString);
-  } // end of method public void keyPressed(String keyString)
+  }
 
 
   // ***** MouseListener interface methods *****
 
-
-  // start of mouseClicked(MouseEvent e) (MouseListener interface)
   public void mouseClicked(MouseEvent e) 
   {
     //int xPos = e.getX();
     //int yPos = e.getY();
-  }  // end of public void mouseClicked(MouseEvent e) 
+  }
 
 
-  // start of mousePressed(MouseEvent e) (MouseListener interface)
   public void mousePressed(MouseEvent e) 
   {
      // nothing to do
-  }  // end of public void mousePressed(MouseEvent e)
+  }
 
 
-
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *** if the mouse is released, fire a bullet  ****************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
-  // *************************************************************************
+  // *** if the mouse is released, fire a bullet  ************************
   public void mouseReleased(MouseEvent e) 
   {
     dragging = false;
     startMouseDragX = -1;
     startMouseDragY = -1;
-    // nothing to do
-  }  // end of public void mouseReleased(MouseEvent e)
+  }
 
 
   public void mouseEntered(MouseEvent e) 
   {
     // nothing to do
-  }  // end of public void mouseEntered(MouseEvent e)
+  }
 
 
   public void mouseExited(MouseEvent e) 
   {
 
-  }  // end of public void mouseExited(MouseEvent e)
+  }
 
 
   // ***** MouseMotionListener interface methods *****
@@ -2090,27 +1594,15 @@ class DrawPanel extends JPanel implements  MouseListener, MouseMotionListener
     int xPos = e.getX();
     int yPos = e.getY();
     testXY = "X=" + xPos + "  Y=" + yPos;
-  }  // end of public void mouseMoved(MouseEvent e) 
+  }
 
 
   public void mouseDragged(MouseEvent e) 
   {
      // nothing to do
-  }  // end of public void mouseDragged(MouseEvent e)
+  }
 
-} // end of class DrawPanel
-
-
-// *************************************************************************************
-// *************************************************************************************
-// *************************************************************************************
-// *************************************************************************************
-// this is the END of class DrawPanel for the game
-// *************************************************************************************
-// *************************************************************************************
-// *************************************************************************************
+}
 
 
-
-
-} // end of class Main (SpaceInvadersClassic)
+}
