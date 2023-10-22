@@ -1,2 +1,2 @@
 # Space-Invaders
-Fun space invaders game!
+Fun little space invaders game!
